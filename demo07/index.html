@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="../build/react.js"></script>
+    <script src="../build/react-dom.js"></script>
+    <script src="../build/browser.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/main.css">
+  </head>
+  <body>
+    <div id="example"></div>
+
+    <script type="text/babel">
+
+// 有时需要从组件获取真实 DOM 的节点，这时就要用到 ref 属性
+//可参考官方文档：https://facebook.github.io/react/docs/events.html#supported-events
+    var MyComponent = React.createClass({
+      handleClick: function() {
+        this.refs.myTextInput.focus();
+        this.refs.myTextInput.value = "xixi haha";
+      },
+          // 有一个地方需要注意，就是 class 属性需要写成 className ，for 属性需要写成 htmlFor ，这是因为 class 和 for 是 JavaScript 的保留字。所以下面的那个input的class属性要用className来标识。
+      render: function() {
+        return (
+          <div>
+            <input className="input_small" type="text" ref="myTextInput" />
+            <input type="button" value="Focus the text input" onClick={this.handleClick} />
+          </div>
+        );
+      }
+    });
+
+    ReactDOM.render(
+      <MyComponent />,
+      document.getElementById('example')
+    );
+    </script>
+  </body>
+</html>

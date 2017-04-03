@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../build/react.js"></script>
+    <script src="../build/react-dom.js"></script>
+    <script src="../build/browser.min.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+    <div id="clock"></div>
+    <div id="clock1"></div>
+    <div id="clock2"></div>
+    <script type="text/babel">
+        /* 绑定事件 */
+        class Toggle extends React.Component {
+            constructor(props) {
+                super(props);
+                this.state = {isToggleOn: true};
+                // This binding is necessary to make `this` work in the callback
+                this.handleClick = this.handleClick.bind(this);
+            }
+
+            handleClick(e) {
+                e.preventDefault();
+                console.log('The link was clicked.');
+                this.setState(prevState => ({
+                    isToggleOn: !prevState.isToggleOn
+                }));
+            }
+
+            render() {
+                return (
+                        <button onClick={this.handleClick}>
+                            {this.state.isToggleOn ? 'ON' : 'OFF'}
+                        </button>
+                );
+            }
+        }
+
+        ReactDOM.render(
+                <Toggle />,
+                document.getElementById('root')
+        );
+
+        /* 时钟一 */
+        function tick() {
+            const element = (
+                    <div>
+                        <h1>Hello, world!</h1>
+                        <h2>It is {new Date().toLocaleTimeString()}.</h2>
+                    </div>
+            );
+            ReactDOM.render(
+                    element,
+                    document.getElementById('clock')
+            );
+        }
+        setInterval(tick, 1000);
+
+        /* 时钟二 */
+        function Clock(props) {
+            return (
+                    <div>
+                        <h1>Hello, world!</h1>
+                        <h2>It is {props.date.toLocaleTimeString()}.</h2>
+                    </div>
+            );
+        }
+
+        function tick1() {
+            ReactDOM.render(
+                    <Clock date={new Date()} />,
+                    document.getElementById('clock1')
+            );
+        }
+
+        setInterval(tick1, 1000);
+
+        class ClockC extends React.Component {
+            constructor(props) {
+                super(props);
+                this.state = {date: new Date()};
+            }
+
+            componentDidMount (){
+                console.log("mounting")
+            }
+
+            componentWillUnmount() {
+                console.log("unmounting")
+            }
+
+            render() {
+                this.state.date = new Date();
+                return (
+
+                        <div>
+                            <h1>Hello, world!</h1>
+                            <h2>It is {this.state.date.toLocaleTimeString()}.</h2>
+                        </div>
+                )
+            }
+        }
+
+        function tick2() {
+            ReactDOM.render(
+                    <ClockC />,
+                    document.getElementById('clock2')
+            );
+        }
+        setInterval(tick2, 1000);
+    </script>
+</body>
+</html>

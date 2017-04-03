@@ -1,0 +1,16 @@
+@charset:"utf-8";
+// 从今天开始，我将用Less编写css
+@input_height:30px;
+@input_weight:200px;
+@font_normal:16px;
+
+.mr(@m_width) {
+	margin-right: @m_width;
+}
+
+.input_small{
+	width: @input_weight;
+	height: @input_height;
+	font-size: @font_normal;
+	.mr(20px);
+}

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../build/react.js"></script>
+    <script src="../build/react-dom.js"></script>
+    <script src="../build/browser.min.js"></script>
+</head>
+<body>
+<div id="example"></div>
+<script type="text/babel">
+    var data = "123";
+
+    class Greeting extends React.Component {
+        render() {
+            return (<h1>Hello, {this.props.name}</h1>);
+        }
+    }
+
+    Greeting.propTypes = {
+        name: React.PropTypes.string.isRequired
+    };
+
+    const greeting = <h1>"greeting"</h1>;
+
+    function test(user) {
+        return user.name+' '+user.age
+    }
+
+    const user = {
+        name : 'john',
+        age : 12
+    }
+
+    const element = (
+            <h1>
+                {test(user)}
+            </h1>
+    );
+
+    ReactDOM.render(
+            element,
+            document.getElementById('example')
+    );
+</script>
+</body>
+</html>

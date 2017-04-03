@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="../build/react.js"></script>
+    <script src="../build/react-dom.js"></script>
+    <script src="../build/browser.min.js"></script>
+  </head>
+  <body>
+    <div id="example"></div>
+    <script type="text/babel">
+
+      var data = 123;
+      var title = "123";
+      var isMan = true;
+
+      function process() {
+        alert('hello world');
+      }
+
+      var MyTitle = React.createClass({
+        // https://facebook.github.io/react/docs/react-api.html#react.proptypes
+        // 可以参考上面的官方doc查看react的类型定义有哪些。
+        propTypes: {
+          title: React.PropTypes.string.isRequired,
+          age: React.PropTypes.number.isRequired,
+          isMan : React.PropTypes.bool.isRequired,
+          process : React.PropTypes.func.isRequired
+        },
+
+        render: function() {
+          return <h1> {this.props.title} {this.props.age} {this.props.isMan ? "true":"false"} {this.props.process()}</h1>;
+        }
+      });
+
+      ReactDOM.render(
+        <MyTitle title={title} age={data} isMan={isMan} process={process}/>,
+        document.getElementById('example')
+      );
+
+    </script>
+  </body>
+</html>
+
